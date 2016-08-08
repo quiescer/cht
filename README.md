@@ -3,6 +3,12 @@ Keep cheatsheets just a few keystrokes away
 
 A pair of shell scripts to facilitate access to cheatsheets or any other frequently used documentation.
 
+The following document types are supported, and you can add any others you have viewers for:
+* plaintext (.txt extension)
+* HTML (.htm or .html)
+* image files (.jpg or .png)
+* PDF files (.pdf)
+
 Put cht in a directory in your path (e.g. /usr/local/bin or $HOME/bin if your path includes it) and rofi_scripts/cht.sh can be anywhere as it is designed to be called from your window manager with keybinding including its full path.
 
 rofi_scripts/cht.sh is a shell script that generates a rofi menu listing of suitable documents in a configured cheatsheet directory (e.g. $HOME/Documents/Cheatsheets)
