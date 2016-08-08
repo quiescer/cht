@@ -22,7 +22,7 @@ list_cheatsheets()
     fi
 
     if [ -z "$sheets_dir" ]; then
-        sheets_dir="~/Documents/Cheatsheets"
+        sheets_dir="$HOME/Documents/Cheatsheets"
     fi
 
     cd "$sheets_dir"
