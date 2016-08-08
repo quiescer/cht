@@ -26,10 +26,13 @@ list_cheatsheets()
     fi
 
     cd "$sheets_dir"
+    # Find interesting files, remove the leading "./" and exclude _files
+    # directories that contain image files, CSS, etc that are created by
+    # web browsers when saving a web page.
     find -regex '.*\.\(txt\|png\|jpg\|pdf\|html\)' | sed 's@^\./@@' | egrep -v '_files\/' | sort
 }
 
-cheatsheet=$( (list_cheatsheets) | rofi -dmenu -p "Select cheatsheet:")
+cheatsheet=$( (list_cheatsheets) | rofi -dmenu -i -hide-scrollbar -p "Select cheatsheet:")
 
 if [ -n "${cheatsheet}" ]
 then
