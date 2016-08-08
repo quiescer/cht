@@ -1,0 +1,56 @@
+General
+
+CTRL+D              Open Quick Describe window.
+CTRL+TAB            Cycle through a collection of "child windows" or tabs in a window
+F1                  Open the Toad documentation
+F4                  Immediately describe object in popup window.
+F10                 Display right-click menu
+
+Debugger
+
+CTRL+F5             Add watch at cursor
+CTRL+ALT+B          Display the PL/SQL Debugger Breakpoints window
+CTRL+ALT+D          Display the PL/SQL Debugger DBMS Output window
+CTRL+ALT+E          Display the PL/SQL Debugger Evaluate/Modify window
+CTRL+ALT+C          Display the PL/SQL Debugger Call Stack window
+CTRL+ALT+W          Display the PL/SQL Debugger Watches window
+F11                 Run (continue execution)
+F12                 Run to cursor
+SHIFT+F5            Set or delete a breakpoint on the current line
+SHIFT+F7            Trace into
+SHIFT+F8            Step over
+SHIFT+F10           Trace out
+SHIFT+CTRL+F9       Set parameters
+
+Editor
+
+ALT+UP              Display previous statement
+ALT+DOWN            Display next statement (after ALT+UP)
+CTRL+B              Comment block
+CTRL+E              Execute Explain Plan on the current statement
+CTRL+M              Make code statement.
+CTRL+N              Sum selected fields. Can also include other calculations, e.g. average or count.
+CTRL+P              Strip code statement.
+CTRL+T              Display pick list drop-down
+
+There are a variety of shortcut keys to use with the pick list.
+CTRL+F9             Verify statement without execution (parse) in the Editor
+CTRL+F12            Pass the SQL or Editor contents to the specified external editor.
+CTRL+PERIOD         Display code completion list
+CTRL+ENTER          Execute current SQL (same as SHIFT+F9)
+CTRL+ALT+PAGEUP     Navigate to the previous results panel tab
+CTRL+ALT+PAGEDOWN   Navigate to the next results panel tab
+F2                  Toggle full screen Editor
+F5                  Execute as script.
+F6                  Toggle between Editor and Results panel
+F7                  Clear all text, trace into the Editor
+F8                  Recall previous SQL statement in the Editor
+F9                  Execute statement in the Editor
+SHIFT+F2            Toggle full screen grid
+
+Find and Replace
+CTRL+F              Find text
+CTRL+G              Go to line number
+CTRL+R              Find and replace
+F3                  Find next occurrence
+SHIFT+F3            Find previous occurrence

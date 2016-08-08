@@ -1,0 +1,96 @@
+Shortcuts that are always turned on
+===================================
+
+Use arrow keys or j & k to view messages and start composing
+
+Use n and p to go the next/previous messages in a conversation thread.
+
+
+Navigate in compose
+-------------------
+
+Use the following combinations of keys when you have compose windows or chats open.
+Shortcut Key        Definition
+Ctrl + .            Advance to next window
+Ctrl + ,            Go to previous window
+Ctrl + Shift + c    Add Cc recipients
+Ctrl + Shift + b    Add Bcc recipients
+Ctrl + Shift + f    Change "from" address
+Shift + Esc         Focus main window
+
+
+Shortcuts that need to be turned on
+===================================
+
+c                   Compose
+d                   Compose in a new tab
+/                   Search
+k                   Move to newer conversation
+j                   Move to older conversation
+n                   Newer message
+p                   Previous message
+`                   Go to next inbox section
+~                   Go to previous inbox section
+o or Enter          Open
+u                   Return to conversation list
+e                   Archive
+m                   Mute
+x                   Select conversation
+s                   Star a message or conversation
++                   Mark as important
+-                   Mark as unimportant
+!                   Report spam
+r                   Reply
+a                   Reply all
+f                   Forward
+Esc                 Escape from input field
+Ctrl + s            Save draft
+#                   Delete
+l                   Label
+v                   Move to
+Shift + i           Mark as read
+Shift + u           Mark as unread
+
+[                   Removes from current view and previous
+]                   Removes from current view and next
+{                   Archive and previous
+}                   Archive and next
+z                   Undo
+Shift + n           Update current conversation
+q                   Move cursor to chat search
+y                   Remove from Current View (excl. Spam, Sent, All Mail)
+.                   Show more actions
+,                   Moves cursor to the first button in your Gmail toolbar
+
+Ctrl + Down arrow   Opens options in Chat
+k                   Move up a contact
+j                   Move down a contact
+o or Enter          Open
+u                   Return to contact list view
+e                   Remove from Current Group
+x                   Select contact
+Esc                 Escape from input field
+#                   Delete
+l                   Group membership
+z                   Undo
+
+Combo-keys                   
+----------
+Use the following combinations of keys to navigate through Gmail.
+
+Shortcut Key        Definition
+Tab then Enter      Send message
+y then o            Archive and next
+g then a            Go to 'All Mail'
+g then s            Go to 'Starred'
+g then c            Go to 'Contacts'
+g then d            Go to 'Drafts'
+g then l            Go to 'Label'
+g then i            Go to 'Inbox'
+g then t            Go to 'Sent Mail'
+* then a            Select all
+* then n            Select none
+* then r            Select read
+* then u            Select unread
+* then s            Select starred
+* then t            Select unstarred

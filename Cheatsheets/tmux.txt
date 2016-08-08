@@ -1,0 +1,44 @@
+tmux -- terminal multiplexer
+(from http://cheat.errtheblog.com/s/tmux)
+
+Managing tmux sessions:
+$ tmux      # start tmux server
+$ tmux at   # attach running sessions to a terminal
+$ tmux ls   # list running tmux sessions
+$ exit      # close tmux session
+
+Sharing sessions between terminals:
+$ tmux new -s session_name # make new named session
+$ tmux at -t session_name  # attach to exist session (allowing shared sessions)
+$ tmux kill-session -t session_name  # kill named session
+
+Commands (used within a running tmux session):
+
+NOTE: All commands need to be prefixed with the action key.
+      By default, this is CTRL-b
+
+ c  - create new window
+n/p - move to next/previous window
+0-9 - move to window number 0-9
+ f  - find window by name
+ w  - menu with all windows
+ &  - kill current window
+ ,  - rename window
+
+ %  - split window, adding a vertical pane to the right
+ "  - split window, adding an horizontal pane below
+←/→ - move focus to left/right pane
+↑/↓ - move focus to upper/lower pane
+
+ !  - Break current pane into new window
+ x  - Kill the current pane.
+ d  - detach the current client
+
+ [  - enter copy mode (then use emacs select/yank keys)
+      * press CTRL-SPACE or CTRL-@ to start selecting text
+      * move cursor to end of desired text
+      * press ALT-w to copy selected text
+
+ ]  - paste copied text
+
+ ?  - show tmux key bindings

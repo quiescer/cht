@@ -1,0 +1,100 @@
+#!/usr/bin/env sh
+
+# Script to find a cheatsheet in a designated directory based
+# on a partial name match and display it with what is hopefully
+# an appropriate viewer.
+# TODO: file extension -> viewer mappings more flexible (i.e.
+# not hard-coded maybe)
+
+# By default assume we are being run from a terminal window or
+# console and so don't need to spawn a terminal for non-X11 viewers
+# such as less. However, if we're being called by the rofi script
+# we need to spawn a term as we don't have a terminal window at
+# the ready. Hence the rofi script will pass the --spawn argument.
+spawn=0
+
+# Read arguments
+while [ $# -gt 0 ]; do
+
+	case "$1" in
+		-s|--spawn)
+			spawn=1
+			shift
+			;;
+		*)
+		    break
+			;;
+    esac
+done
+
+
+# Initialise and read config
+sheets_dir=""
+conf=$HOME/.config/cht.conf
+
+if [ -f "$conf" ]; then
+    . "$conf"
+fi
+
+if [ -z "$sheets_dir" ]; then
+    sheets_dir="~/Documents/Cheatsheets"
+fi
+
+# Get cheatsheet and optional search from arguments
+sheet_name=${1:-}
+search=${2:-}
+
+if [ -n "$sheet_name" ]; then
+
+    # Change to the sheets directory
+    cd "$sheets_dir"
+
+    # Find best matching cheatsheet
+    sheet_rel_path="$(find -iname '*'$sheet_name'*' -regex '.*\.\(txt\|png\|jpg\|pdf\|html\)' | head -n 1 | sed 's@\./@@')"
+
+    if [ -z "$sheet_rel_path" ]; then
+        echo "No cheatsheet like '$sheet_name' found in $sheets_dir"
+        exit 2
+    fi
+
+    extension=${sheet_rel_path##*.}
+
+else
+
+    echo "Usage: $(basename $0) [sheet name] [search]"
+    exit 1
+
+fi
+
+case $extension in
+    pdf)
+        test -x $(which zathura) && zathura "$sheet_rel_path"
+        ;;
+
+    html|htm|png|jpg)
+        if [ -x $(which w3m) ]; then
+            links2 -g "$sheet_rel_path" 
+        elif [ -x $(which w3m) ]; then
+            w3m "$sheet_rel_path" 
+        elif [ -x $(which dillo) ]; then
+            dillo -f "$sheet_rel_path"
+        elif [ -x $(which x-www-browser) ]; then
+            x-www-browser -f "$sheet_rel_path"
+        fi
+        ;;
+
+    txt)
+        if [ -n "$search" ]; then
+			run='"grep --color -i '"$search"' '"$sheet_rel_path"'"'
+        else
+			run='less '"$sheet_rel_path"''
+	    fi
+
+		if [ "$spawn" = "1" ]; then
+            /usr/bin/x-terminal-emulator -T cht -e '/bin/sh -c "'"$run"'"'
+		else
+			$run
+        fi
+        ;;
+
+esac        
