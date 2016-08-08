@@ -16,14 +16,14 @@ spawn=0
 # Read arguments
 while [ $# -gt 0 ]; do
 
-	case "$1" in
-		-s|--spawn)
-			spawn=1
-			shift
-			;;
-		*)
-		    break
-			;;
+    case "$1" in
+        -s|--spawn)
+            spawn=1
+            shift
+            ;;
+        *)
+            break
+            ;;
     esac
 done
 
@@ -37,7 +37,7 @@ if [ -f "$conf" ]; then
 fi
 
 if [ -z "$sheets_dir" ]; then
-    sheets_dir="~/Documents/Cheatsheets"
+    sheets_dir="$HOME/Documents/Cheatsheets"
 fi
 
 # Get cheatsheet and optional search from arguments
@@ -85,15 +85,15 @@ case $extension in
 
     txt)
         if [ -n "$search" ]; then
-			run='"grep --color -i '"$search"' '"$sheet_rel_path"'"'
+            run='"grep --color -i '"$search"' '"$sheet_rel_path"'"'
         else
-			run='less '"$sheet_rel_path"''
-	    fi
+            run='less '"$sheet_rel_path"''
+	fi
 
-		if [ "$spawn" = "1" ]; then
+        if [ "$spawn" = "1" ]; then
             /usr/bin/x-terminal-emulator -T cht -e '/bin/sh -c "'"$run"'"'
-		else
-			$run
+        else
+            $run
         fi
         ;;
 
