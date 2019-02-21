@@ -43,11 +43,11 @@ if [ -z "$sheets_dir" ]; then
 fi
 
 if [ -z "$pdf_viewer" ]; then
-    pdf_viewer="evince"
+    pdf_viewer="zathura"
 fi
 
 if [ -z "$terminal_starter" ]; then
-    terminal_starter="/usr/bin/gnome-terminal -- %s"
+    terminal_starter="/usr/bin/x-terminal-emulator -T cht -e '/bin/sh -c "'"%s"'"'"
 fi
 
 # Get cheatsheet and optional search from arguments
