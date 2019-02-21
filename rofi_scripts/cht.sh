@@ -32,7 +32,7 @@ list_cheatsheets()
     find -regex '.*\.\(txt\|png\|jpg\|pdf\|html\)' | sed 's@^\./@@' | egrep -v '_files\/' | sort
 }
 
-cheatsheet=$( (list_cheatsheets) | rofi -dmenu -i -hide-scrollbar -p "Select cheatsheet")
+cheatsheet=$( (list_cheatsheets) | rofi -dmenu -i -hide-scrollbar -p "Select cheatsheet:")
 
 if [ -n "${cheatsheet}" ]
 then
