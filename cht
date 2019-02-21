@@ -30,6 +30,8 @@ done
 
 # Initialise and read config
 sheets_dir=""
+pdf_viewer=""
+terminal_starter=""
 conf=$HOME/.config/cht.conf
 
 if [ -f "$conf" ]; then
@@ -38,6 +40,14 @@ fi
 
 if [ -z "$sheets_dir" ]; then
     sheets_dir="$HOME/Documents/Cheatsheets"
+fi
+
+if [ -z "$pdf_viewer" ]; then
+    pdf_viewer="evince"
+fi
+
+if [ -z "$terminal_starter" ]; then
+    terminal_starter="/usr/bin/gnome-terminal -- %s"
 fi
 
 # Get cheatsheet and optional search from arguments
@@ -68,14 +78,14 @@ fi
 
 case $extension in
     pdf)
-        test -x $(which zathura) && zathura "$sheet_rel_path"
+        test -x $(which $pdf_viewer) && $pdf_viewer "$sheet_rel_path"
         ;;
 
     html|htm|png|jpg)
         if [ -x $(which links2) ]; then
-            links2 -g "$sheet_rel_path" 
+            links2 -g "$sheet_rel_path"
         elif [ -x $(which w3m) ]; then
-            w3m "$sheet_rel_path" 
+            w3m "$sheet_rel_path"
         elif [ -x $(which dillo) ]; then
             dillo -f "$sheet_rel_path"
         elif [ -x $(which x-www-browser) ]; then
@@ -91,10 +101,10 @@ case $extension in
 	fi
 
         if [ "$spawn" = "1" ]; then
-            /usr/bin/x-terminal-emulator -T cht -e '/bin/sh -c "'"$run"'"'
+            $(printf "$terminal_starter" "$run")
         else
             $run
         fi
         ;;
 
-esac        
+esac
