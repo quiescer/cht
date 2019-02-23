@@ -47,7 +47,7 @@ if [ -z "$pdf_viewer" ]; then
 fi
 
 if [ -z "$terminal_starter" ]; then
-    terminal_starter="/usr/bin/x-terminal-emulator -T cht -e /bin/sh -c \"%s\""
+    terminal_starter="/usr/bin/x-terminal-emulator --hold -T cht -e /bin/sh -c '%s'"
 fi
 
 # Get cheatsheet and optional search from arguments
@@ -60,7 +60,7 @@ if [ -n "$sheet_name" ]; then
     cd "$sheets_dir"
 
     # Find best matching cheatsheet
-    sheet_rel_path="$(find -iname '*'$sheet_name'*' -regex '.*\.\(txt\|png\|jpg\|pdf\|html\)' | head -n 1 | sed 's@\./@@')"
+    sheet_rel_path="$(find -iname "*$sheet_name*" -regex '.*\.\(txt\|png\|jpg\|pdf\|html\)' -print -quit | sed 's@\./@@')"
 
     if [ -z "$sheet_rel_path" ]; then
         echo "No cheatsheet like '$sheet_name' found in $sheets_dir"
@@ -95,15 +95,19 @@ case $extension in
 
     txt)
         if [ -n "$search" ]; then
-            run='"grep --color -i '"$search"' '"$sheet_rel_path"'"'
+            if [ "$spawn" = "1" ]; then
+                commandline="grep --color -i \"$search\" \"%s\" | less"
+            else
+                commandline="grep --color -i \"$search\" \"%s\""
+            fi
         else
-            run="less '$sheet_rel_path'"
+            commandline="less \"%s\""
 	fi
 
         if [ "$spawn" = "1" ]; then
-            eval $(printf "$terminal_starter" "$run")
+            eval $(printf "$terminal_starter" "$(printf "$commandline" "$sheet_rel_path")")
         else
-            $run
+            eval $(printf "$commandline" "$sheet_rel_path")
         fi
         ;;
 

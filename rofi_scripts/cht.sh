@@ -36,5 +36,5 @@ cheatsheet=$( (list_cheatsheets) | rofi -dmenu -i -hide-scrollbar -p "Select che
 
 if [ -n "${cheatsheet}" ]
 then
-    cht --spawn ""${cheatsheet}""
+    cht --spawn "${cheatsheet}"
 fi
