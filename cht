@@ -47,7 +47,7 @@ if [ -z "$pdf_viewer" ]; then
 fi
 
 if [ -z "$terminal_starter" ]; then
-    terminal_starter="/usr/bin/x-terminal-emulator -T cht -e '/bin/sh -c "'"%s"'"'"
+    terminal_starter="/usr/bin/x-terminal-emulator -T cht -e /bin/sh -c \"%s\""
 fi
 
 # Get cheatsheet and optional search from arguments
@@ -97,11 +97,11 @@ case $extension in
         if [ -n "$search" ]; then
             run='"grep --color -i '"$search"' '"$sheet_rel_path"'"'
         else
-            run='less '"$sheet_rel_path"''
+            run="less '$sheet_rel_path'"
 	fi
 
         if [ "$spawn" = "1" ]; then
-            $(printf "$terminal_starter" "$run")
+            eval $(printf "$terminal_starter" "$run")
         else
             $run
         fi
