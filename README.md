@@ -36,3 +36,7 @@ Recommended viewers for common document types:
 * html - links2 with the -g option for any graphics, can also use w3m, dillo, or a heavyweight browser, but I found links2 best
 * pdf - zathura (evince and others should work though)
 * text - /usr/bin/less or any other text file editor/viewer
+
+# Alternative: Online Cheatsheets that are only a curl(1) away
+
+https://cheat.sh/
