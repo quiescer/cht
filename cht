@@ -105,7 +105,7 @@ case $extension in
     html|htm)
         if [ -x $(which links) ]; then
             links -g "$sheet_rel_path"
-        if [ -x $(which links2) ]; then
+        elif [ -x $(which links2) ]; then
             links2 -g "$sheet_rel_path"
         elif [ -x $(which w3m) ]; then
             w3m "$sheet_rel_path"
