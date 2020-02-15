@@ -34,6 +34,9 @@ pdf_viewer=""
 terminal_starter=""
 conf=$HOME/.config/cht.conf
 
+# Check if we're being used in i3
+i3pid=$(pidof i3)
+
 if [ -f "$conf" ]; then
     . "$conf"
 fi
@@ -47,7 +50,11 @@ if [ -z "$pdf_viewer" ]; then
 fi
 
 if [ -z "$terminal_starter" ]; then
-    terminal_starter="/usr/bin/x-terminal-emulator --hold -T cht -e /bin/sh -c '%s'"
+    if [ -n $i3pid ]; then
+        terminal_starter="i3-sensible-terminal -T cht -e /bin/sh -c '%s'"
+    elif [ -x $(which x-terminal-emulator) ]; then
+        terminal_starter="x-terminal-emulator -T cht -e /bin/sh -c '%s'"
+    fi
 fi
 
 # Get cheatsheet and optional search from arguments
@@ -81,7 +88,23 @@ case $extension in
         test -x $(which $pdf_viewer) && $pdf_viewer "$sheet_rel_path"
         ;;
 
-    html|htm|png|jpg)
+    png|jpg)
+        # Binary name for links2 may be 'links' or 'links2', depending
+        # on distro
+        if [ -x $(which links) ]; then
+            links -g "$sheet_rel_path"
+        elif [ -x $(which links2) ]; then
+            links2 -g "$sheet_rel_path"
+        elif [ -x $(which dillo) ]; then
+            dillo -f "$sheet_rel_path"
+        elif [ -x $(which x-www-browser) ]; then
+            x-www-browser -f "$sheet_rel_path"
+        fi
+        ;;
+
+    html|htm)
+        if [ -x $(which links) ]; then
+            links -g "$sheet_rel_path"
         if [ -x $(which links2) ]; then
             links2 -g "$sheet_rel_path"
         elif [ -x $(which w3m) ]; then
