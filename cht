@@ -52,7 +52,7 @@ fi
 if [ -z "$terminal_starter" ]; then
     if [ -n $i3pid ]; then
         terminal_starter="i3-sensible-terminal -T cht -e /bin/sh -c '%s'"
-    elif [ -x $(which x-terminal-emulator) ]; then
+    elif [ -x $(type -P x-terminal-emulator) ]; then
         terminal_starter="x-terminal-emulator -T cht -e /bin/sh -c '%s'"
     fi
 fi
@@ -85,33 +85,33 @@ fi
 
 case $extension in
     pdf)
-        test -x $(which $pdf_viewer) && $pdf_viewer "$sheet_rel_path"
+        test -x $(type -P $pdf_viewer) && $pdf_viewer "$sheet_rel_path"
         ;;
 
     png|jpg)
         # Binary name for links2 may be 'links' or 'links2', depending
         # on distro
-        if [ -x $(which links2) ]; then
+        if [ -x $(type -P links2) ]; then
             links2 -g "$sheet_rel_path"
-        elif [ -x $(which links) ]; then
+        elif [ -x $(type -P links) ]; then
             links -g "$sheet_rel_path"
-        elif [ -x $(which dillo) ]; then
+        elif [ -x $(type -P dillo) ]; then
             dillo -f "$sheet_rel_path"
-        elif [ -x $(which x-www-browser) ]; then
+        elif [ -x $(type -P x-www-browser) ]; then
             x-www-browser -f "$sheet_rel_path"
         fi
         ;;
 
     html|htm)
-        if [ -x $(which links2) ]; then
+        if [ -x $(type -P links2) ]; then
             links2 -g "$sheet_rel_path"
-        elif [ -x $(which links) ]; then
+        elif [ -x $(type -P links) ]; then
             links -g "$sheet_rel_path"
-        elif [ -x $(which w3m) ]; then
+        elif [ -x $(type -P w3m) ]; then
             w3m "$sheet_rel_path"
-        elif [ -x $(which dillo) ]; then
+        elif [ -x $(type -P dillo) ]; then
             dillo -f "$sheet_rel_path"
-        elif [ -x $(which x-www-browser) ]; then
+        elif [ -x $(type -P x-www-browser) ]; then
             x-www-browser -f "$sheet_rel_path"
         fi
         ;;
