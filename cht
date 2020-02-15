@@ -13,6 +13,15 @@
 # the ready. Hence the rofi script will pass the --spawn argument.
 spawn=0
 
+# Functions
+try_viewer () {
+    executable=$(command -v $1)
+    if [ "$executable" != "" ]; then
+        $executable $2 "$sheet_rel_path"
+        exit
+    fi
+}
+
 # Read arguments
 while [ $# -gt 0 ]; do
 
@@ -52,7 +61,7 @@ fi
 if [ -z "$terminal_starter" ]; then
     if [ -n $i3pid ]; then
         terminal_starter="i3-sensible-terminal -T cht -e /bin/sh -c '%s'"
-    elif [ -x $(type -P x-terminal-emulator) ]; then
+    elif [ "$(command -v x-terminal-emulator)" != "" ]; then
         terminal_starter="x-terminal-emulator -T cht -e /bin/sh -c '%s'"
     fi
 fi
@@ -85,35 +94,24 @@ fi
 
 case $extension in
     pdf)
-        test -x $(type -P $pdf_viewer) && $pdf_viewer "$sheet_rel_path"
+        try_viewer $pdf_viewer
         ;;
 
     png|jpg)
         # Binary name for links2 may be 'links' or 'links2', depending
         # on distro
-        if [ -x $(type -P links2) ]; then
-            links2 -g "$sheet_rel_path"
-        elif [ -x $(type -P links) ]; then
-            links -g "$sheet_rel_path"
-        elif [ -x $(type -P dillo) ]; then
-            dillo -f "$sheet_rel_path"
-        elif [ -x $(type -P x-www-browser) ]; then
-            x-www-browser -f "$sheet_rel_path"
-        fi
+        try_viewer links2 -g
+        try_viewer links -g
+        try_viewer dillo -f
+        try_viewer x-www-browser -f
         ;;
 
     html|htm)
-        if [ -x $(type -P links2) ]; then
-            links2 -g "$sheet_rel_path"
-        elif [ -x $(type -P links) ]; then
-            links -g "$sheet_rel_path"
-        elif [ -x $(type -P w3m) ]; then
-            w3m "$sheet_rel_path"
-        elif [ -x $(type -P dillo) ]; then
-            dillo -f "$sheet_rel_path"
-        elif [ -x $(type -P x-www-browser) ]; then
-            x-www-browser -f "$sheet_rel_path"
-        fi
+        try_viewer links2 -g
+        try_viewer links -g
+        try_viewer w3m
+        try_viewer dillo -f
+        try_viewer x-www-browser -f
         ;;
 
     txt)
